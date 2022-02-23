@@ -45,7 +45,24 @@ var dati=[
    var nextId=10006;
 
    $(document).ready(function(){
+
+
+    $("body").on("click", ".btn-delete", function() {
+      var td = $(this).parent("td");
+      var id = td.data("id");
+      for (var i = 0; i < dati.length; i++) {
+        if (dati[i].id == id) {
+          dati.splice(i, 1);
+          break;
+        }
+      }
+      DisegnaTabella();
+    })
+
     DisegnaTabella();
+
+
+
    });
 
    
@@ -57,10 +74,10 @@ var dati=[
         riga+='<td>'+value.id+'</td>';
         riga+='<td>'+value.firstName+'</td>';
         riga+='<td>'+value.lastName+'</td>';
-        riga+='<td>'+ '<button type="button" class="btn btn-danger">Elimina</button>'+'</td>';
+        riga+='<td data-id='+value.id+'><button type="button" class="btn btn-danger btn-delete">Elimina</button>'+'</td>';
         riga+='</tr>';
     });
-    $("tbody").append(riga);
+    $("tbody").html(riga);
    }
   
   
